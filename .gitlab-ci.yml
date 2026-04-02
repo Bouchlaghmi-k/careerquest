@@ -1,0 +1,19 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  script:
+    - echo "Tests will be added later"
+
+build:
+  stage: build
+  script:
+    - echo "Build will be added later"
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploy will be added later"
