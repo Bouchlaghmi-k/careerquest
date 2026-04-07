@@ -20,9 +20,9 @@ function Quests() {
 
       <div className="card-grid">
         {profile.quests.map((quest, index) => (
-          <div className="card" key={index}>
+          <div className={`card quest-card ${quest.completed ? "quest-done" : "quest-pending"}`} key={index}>
             <h2>{quest.title}</h2>
-            <p>{quest.completed ? "Completed" : "Not completed yet"}</p>
+            <p>{quest.completed ? "Completed" : "In progress"}</p>
           </div>
         ))}
       </div>
