@@ -1,37 +1,44 @@
-import { getProfile } from "../utils/profileStorage";
+import { useEffect, useState } from "react";
+import { getLeaderboard } from "../services/leaderboardService";
 
 function Leaderboard() {
-  const profile = getProfile();
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const leaderboardData = [
-    { name: "Alex", xp: 720 },
-    { name: "Sarah", xp: 680 },
-    { name: "Yassine", xp: 590 },
-    { name: "Abir", xp: 540 },
-  ];
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const data = await getLeaderboard();
+        setPlayers(data);
+      } catch (err) {
+        setError("Unable to load leaderboard");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (profile) {
-    leaderboardData.push({
-      name: profile.name || profile.username,
-      xp: profile.xp,
-    });
-  }
-
-  const sortedLeaderboard = leaderboardData.sort((a, b) => b.xp - a.xp);
+    fetchLeaderboard();
+  }, []);
 
   return (
     <div className="page">
       <h1>Leaderboard</h1>
 
-      <div className="card">
-        <ul>
-          {sortedLeaderboard.map((player, index) => (
-            <li key={index}>
-              #{index + 1} — {player.name} : {player.xp} XP
-            </li>
-          ))}
-        </ul>
-      </div>
+      {loading && <p className="status-text">Loading leaderboard...</p>}
+      {error && <p className="error-text">{error}</p>}
+
+      {!loading && !error && (
+        <div className="card">
+          <ul>
+            {players.map((player, index) => (
+              <li key={player.id}>
+                #{index + 1} — {player.name || player.username} : {player.xp} XP
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
