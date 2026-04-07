@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveProfile } from "../utils/profileStorage";
+import API_BASE_URL from "../services/api";
 
 function Home() {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ function Home() {
     setProfile(null);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/github/${username}/`);
+      const response = await fetch(`${API_BASE_URL}/api/github/${username}/`);
       const data = await response.json();
 
       if (!response.ok) {
