@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { saveProfile } from "../utils/profileStorage";
 
 function Home() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [profile, setProfile] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (!username.trim()) return;
@@ -22,10 +25,17 @@ function Home() {
       }
 
       setProfile(data);
+      saveProfile(data);
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const goToDashboard = () => {
+    if (profile) {
+      navigate("/dashboard");
     }
   };
 
@@ -84,50 +94,9 @@ function Home() {
             </div>
           </div>
 
-          <div className="card-grid">
-            <div className="card">
-              <h2>Achievements</h2>
-              <ul>
-                {profile.achievements.map((achievement, index) => (
-                  <li key={index}>{achievement}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="card">
-              <h2>Top Languages</h2>
-              <ul>
-                {profile.top_languages.map((language, index) => (
-                  <li key={index}>{language}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="card">
-            <h2>Quests</h2>
-            <ul>
-              {profile.quests.map((quest, index) => (
-                <li key={index}>
-                  {quest.title} — {quest.completed ? "Completed" : "Locked"}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="card">
-            <h2>Skills</h2>
-            <div className="skills-list">
-              {profile.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className={skill.unlocked ? "skill-badge unlocked" : "skill-badge locked"}
-                >
-                  {skill.name}
-                </span>
-              ))}
-            </div>
-          </div>
+          <button className="primary-btn" onClick={goToDashboard}>
+            Open Dashboard
+          </button>
         </div>
       )}
     </div>

@@ -1,22 +1,30 @@
+import { getProfile } from "../utils/profileStorage";
+
 function Quests() {
+  const profile = getProfile();
+
+  if (!profile) {
+    return (
+      <div className="page">
+        <h1>Quests</h1>
+        <div className="card">
+          <p>No profile loaded yet. Go to Home and enter a GitHub username.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="page">
       <h1>Quests</h1>
+
       <div className="card-grid">
-        <div className="card">
-          <h2>Complete GitHub Profile</h2>
-          <p>Reward: 100 XP</p>
-        </div>
-
-        <div className="card">
-          <h2>Publish a Project</h2>
-          <p>Reward: 150 XP</p>
-        </div>
-
-        <div className="card">
-          <h2>Unlock Docker Skill</h2>
-          <p>Reward: Skill Badge</p>
-        </div>
+        {profile.quests.map((quest, index) => (
+          <div className="card" key={index}>
+            <h2>{quest.title}</h2>
+            <p>{quest.completed ? "Completed" : "Not completed yet"}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

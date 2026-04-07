@@ -1,21 +1,33 @@
+import { getProfile } from "../utils/profileStorage";
+
 function SkillTree() {
+  const profile = getProfile();
+
+  if (!profile) {
+    return (
+      <div className="page">
+        <h1>Skill Tree</h1>
+        <div className="card">
+          <p>No profile loaded yet. Go to Home and enter a GitHub username.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="page">
       <h1>Skill Tree</h1>
-      <div className="card-grid">
-        <div className="card">
-          <h2>Frontend</h2>
-          <p>HTML, CSS, React</p>
-        </div>
 
-        <div className="card">
-          <h2>Backend</h2>
-          <p>Django, APIs, Authentication</p>
-        </div>
-
-        <div className="card">
-          <h2>DevOps</h2>
-          <p>Docker, CI/CD, Deployment</p>
+      <div className="card">
+        <div className="skills-list">
+          {profile.skills.map((skill, index) => (
+            <span
+              key={index}
+              className={skill.unlocked ? "skill-badge unlocked" : "skill-badge locked"}
+            >
+              {skill.name}
+            </span>
+          ))}
         </div>
       </div>
     </div>
