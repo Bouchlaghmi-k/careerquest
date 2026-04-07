@@ -3,17 +3,68 @@ stages:
   - build
   - deploy
 
-test:
+frontend_test:
   stage: test
+  image: node:20
   script:
-    - echo "Tests will be added later"
+    - cd frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist
+    expire_in: 1 week
 
-build:
+backend_check:
+  stage: test
+  image: python:3.12
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - python -m compileall .
+  artifacts:
+    paths:
+      - backend
+    expire_in: 1 week
+
+build_backend_image:
   stage: build
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
   script:
-    - echo "Build will be added later"
+    - docker build -t "$CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHORT_SHA" ./backend
+    - docker push "$CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHORT_SHA"
+  rules:
+    - if: $CI_COMMIT_BRANCH
 
-deploy:
-  stage: deploy
+build_frontend_image:
+  stage: build
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
   script:
-    - echo "Deploy will be added later"
+    - docker build -t "$CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHORT_SHA" ./frontend
+    - docker push "$CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHORT_SHA"
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+deploy_demo:
+  stage: deploy
+  image: alpine:3.20
+  script:
+    - echo "Deployment stage prepared"
+    - echo "Connect this job to your target server or platform"
+  environment:
+    name: demo
+  when: manual
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
