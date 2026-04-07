@@ -95,9 +95,11 @@ function Home() {
             </div>
           </div>
 
-          <button className="primary-btn" onClick={goToDashboard}>
-            Open Dashboard
-          </button>
+          <div className="action-row">
+  <button className="primary-btn" onClick={goToDashboard}>
+    Open Dashboard
+  </button>
+</div>
         </div>
       )}
     </div>

@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Quests from "./pages/Quests";
 import SkillTree from "./pages/SkillTree";
 import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/quests" element={<Quests />} />
         <Route path="/skills" element={<SkillTree />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   );
