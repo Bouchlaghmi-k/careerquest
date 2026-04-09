@@ -61,21 +61,12 @@ def build_quests(repo_count, languages):
 
 
 def build_skills(languages):
-    possible_skills = [
-        "JavaScript",
-        "Python",
-        "HTML",
-        "CSS",
-        "TypeScript",
-        "Docker"
-    ]
-
     return [
         {
             "name": skill,
-            "unlocked": skill in languages
+            "unlocked": True
         }
-        for skill in possible_skills
+        for skill in sorted(languages)
     ]
 
 
@@ -125,7 +116,7 @@ def fetch_github_profile(username):
         "achievements": achievements,
         "quests": quests,
         "skills": skills,
-        "top_languages": list(languages),
+        "top_languages": sorted(list(languages)),
         "repo_count": repo_count,
         "stars": stars,
     }

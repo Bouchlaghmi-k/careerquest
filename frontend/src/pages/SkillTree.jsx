@@ -6,9 +6,9 @@ function SkillTree() {
   if (!profile) {
     return (
       <div className="page">
-        <h1>Skill Tree</h1>
+        <h1>Compétences</h1>
         <div className="card">
-          <p>No profile loaded yet. Go to Home and enter a GitHub username.</p>
+          <p>Aucun profil n’a encore été chargé. Allez dans l’accueil et saisissez un nom d’utilisateur GitHub.</p>
         </div>
       </div>
     );
@@ -16,7 +16,7 @@ function SkillTree() {
 
   return (
     <div className="page">
-      <h1>Skill Tree</h1>
+      <h1>Compétences</h1>
 
       <div className="card">
         <div className="skills-list">

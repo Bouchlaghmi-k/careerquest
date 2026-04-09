@@ -4,7 +4,7 @@ function XPBar({ xp }) {
 
   return (
     <div className="card">
-      <h2>XP Progress</h2>
+      <h2>Progression XP</h2>
       <div className="xp-bar">
         <div className="xp-fill" style={{ width: `${percentage}%` }}></div>
       </div>

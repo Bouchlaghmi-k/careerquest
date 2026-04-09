@@ -22,13 +22,13 @@ function Home() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "GitHub user not found");
+        throw new Error(data.error || "Utilisateur GitHub introuvable");
       }
 
       setProfile(data);
       saveProfile(data);
     } catch (err) {
-      setError(err.message || "Something went wrong");
+      setError(err.message || "Une erreur est survenue");
     } finally {
       setLoading(false);
     }
@@ -47,53 +47,53 @@ function Home() {
         <div className="hero-bg-glow hero-bg-glow-2"></div>
 
         <div className="hero-v2-content">
-          <div className="hero-badge">Gamified Career Growth Platform</div>
+          <div className="hero-badge">Plateforme de progression professionnelle gamifiée</div>
 
           <h1 className="hero-v2-title">
-            Turn your <span>GitHub journey</span> into XP, levels, quests and real progression.
+            Transformez votre <span>parcours GitHub</span> en XP, niveaux, défis et progression concrète.
           </h1>
 
           <p className="hero-v2-text">
-            CareerQuest transforms public GitHub activity into a modern career dashboard.
-            Analyze repositories, unlock skills, earn achievements, track quests, and compare
-            your progress through a real leaderboard.
+            CareerQuest transforme votre activité publique GitHub en un tableau de bord de carrière moderne.
+            Analysez vos dépôts, débloquez des compétences, gagnez des succès, suivez vos défis et comparez
+            votre progression grâce à un véritable classement.
           </p>
 
           <div className="search-panel">
             <div className="search-panel-top">
               <input
                 type="text"
-                placeholder="Enter GitHub username..."
+                placeholder="Entrez un nom d’utilisateur GitHub..."
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <button className="primary-btn" onClick={handleSearch}>
-                Analyze Profile
+                Analyser le profil
               </button>
             </div>
 
             <div className="search-panel-hint">
-              Try usernames like <span>octocat</span>, <span>torvalds</span>, or your own.
-            </div>
+  Saisissez votre nom d’utilisateur GitHub pour commencer l’analyse.
+</div>
           </div>
 
-          {loading && <p className="status-text">Loading profile...</p>}
+          {loading && <p className="status-text">Chargement du profil...</p>}
           {error && <p className="error-text">{error}</p>}
 
           <div className="hero-stats">
             <div className="hero-stat-card">
               <span className="hero-stat-value">XP</span>
-              <span className="hero-stat-label">Gamified progression</span>
+              <span className="hero-stat-label">Une progression motivante</span>
             </div>
 
             <div className="hero-stat-card">
-              <span className="hero-stat-value">Skills</span>
-              <span className="hero-stat-label">Unlocked from tech stack</span>
+              <span className="hero-stat-value">Compétences</span>
+              <span className="hero-stat-label">Révélées à partir de votre stack</span>
             </div>
 
             <div className="hero-stat-card">
-              <span className="hero-stat-value">Leaderboard</span>
-              <span className="hero-stat-label">Compare real profiles</span>
+              <span className="hero-stat-value">Classement</span>
+              <span className="hero-stat-label">Comparez de vrais profils</span>
             </div>
           </div>
         </div>
@@ -108,40 +108,40 @@ function Home() {
 
             <div className="preview-grid">
               <div className="preview-card preview-main-card">
-                <p className="preview-label">Career Score</p>
-                <h3>Level Up Your Profile</h3>
+                <p className="preview-label">Score carrière</p>
+                <h3>Faites évoluer votre profil</h3>
                 <div className="preview-meter">
                   <div className="preview-meter-fill"></div>
                 </div>
-                <p className="preview-subtext">XP, skills, achievements and growth in one place.</p>
+                <p className="preview-subtext">XP, compétences, succès et progression réunis au même endroit.</p>
               </div>
 
               <div className="preview-card">
-                <p className="preview-label">Achievements</p>
+                <p className="preview-label">Succès</p>
                 <ul className="preview-list">
-                  <li>Project Explorer</li>
-                  <li>JavaScript Builder</li>
-                  <li>Tech Explorer</li>
+                  <li>Explorateur de projets</li>
+                  <li>Bâtisseur JavaScript</li>
+                  <li>Explorateur technologique</li>
                 </ul>
               </div>
 
               <div className="preview-card">
-                <p className="preview-label">Quests</p>
+                <p className="preview-label">Défis</p>
                 <ul className="preview-list">
-                  <li>Reach 3 repositories</li>
-                  <li>Use Python in a project</li>
-                  <li>Unlock new skills</li>
+                  <li>Atteindre 3 dépôts</li>
+                  <li>Utiliser Python dans un projet</li>
+                  <li>Débloquer de nouvelles compétences</li>
                 </ul>
               </div>
 
               <div className="preview-card">
-                <p className="preview-label">Leaderboard</p>
-                <ul className="preview-list">
-                  <li>#1 Linus Torvalds</li>
-                  <li>#2 The Octocat</li>
-                  <li>#3 Your Future Profile</li>
-                </ul>
-              </div>
+  <p className="preview-label">Classement</p>
+  <ul className="preview-list">
+    <li>Classement mondial en temps réel</li>
+    <li>Profils analysés enregistrés</li>
+    <li>Votre profil peut apparaître ici</li>
+  </ul>
+</div>
             </div>
           </div>
         </div>
@@ -151,12 +151,12 @@ function Home() {
         <section className="profile-showcase">
           <div className="profile-showcase-header">
             <div>
-              <p className="section-kicker">Analysis Ready</p>
-              <h2>Your CareerQuest profile has been generated</h2>
+              <p className="section-kicker">Analyse prête</p>
+              <h2>Votre profil CareerQuest a bien été généré</h2>
             </div>
 
             <button className="primary-btn" onClick={goToDashboard}>
-              Open Dashboard
+              Ouvrir le tableau de bord
             </button>
           </div>
 
@@ -168,10 +168,10 @@ function Home() {
                   <h3>{profile.name || profile.username}</h3>
                   <p>@{profile.username}</p>
                   <p>
-                    {profile.xp} XP • Level {profile.level} • {profile.avatar_stage}
+                    {profile.xp} XP • Niveau {profile.level} • {profile.avatar_stage}
                   </p>
                   <a href={profile.profile_url} target="_blank" rel="noreferrer">
-                    View GitHub Profile
+                    Voir le profil GitHub
                   </a>
                 </div>
               </div>
@@ -179,22 +179,22 @@ function Home() {
 
             <div className="card-grid compact-grid">
               <div className="card stat-card-v2">
-                <p className="stat-mini-label">Repositories</p>
+                <p className="stat-mini-label">Dépôts</p>
                 <h3>{profile.repo_count}</h3>
               </div>
 
               <div className="card stat-card-v2">
-                <p className="stat-mini-label">Followers</p>
+                <p className="stat-mini-label">Abonnés</p>
                 <h3>{profile.followers}</h3>
               </div>
 
               <div className="card stat-card-v2">
-                <p className="stat-mini-label">Stars</p>
+                <p className="stat-mini-label">Étoiles</p>
                 <h3>{profile.stars}</h3>
               </div>
 
               <div className="card stat-card-v2">
-                <p className="stat-mini-label">Achievements</p>
+                <p className="stat-mini-label">Succès</p>
                 <h3>{profile.achievements.length}</h3>
               </div>
             </div>

@@ -8,9 +8,9 @@ function Dashboard() {
   if (!profile) {
     return (
       <div className="page">
-        <h1>Dashboard</h1>
+        <h1>Tableau de bord</h1>
         <div className="card">
-          <p>No profile loaded yet. Go to Home and enter a GitHub username.</p>
+          <p>Aucun profil n’a encore été chargé. Allez dans l’accueil et saisissez un nom d’utilisateur GitHub.</p>
         </div>
       </div>
     );
@@ -21,7 +21,7 @@ function Dashboard() {
 
   return (
     <div className="page">
-      <h1>Dashboard</h1>
+      <h1>Tableau de bord</h1>
 
       <div className="card-grid">
         <AvatarCard avatarStage={profile.avatar_stage} level={profile.level} />
@@ -33,35 +33,35 @@ function Dashboard() {
         <div>
           <h2>{profile.name || profile.username}</h2>
           <p>@{profile.username}</p>
-          <p>{profile.repo_count} repositories • {profile.followers} followers</p>
+          <p>{profile.repo_count} dépôts • {profile.followers} abonnés</p>
         </div>
       </div>
 
       <div className="card-grid">
         <div className="card">
-          <h2>Level</h2>
+          <h2>Niveau</h2>
           <p>{profile.level}</p>
         </div>
 
         <div className="card">
-          <h2>Achievements</h2>
+          <h2>Succès</h2>
           <p>{profile.achievements.length}</p>
         </div>
 
         <div className="card">
-          <h2>Completed Quests</h2>
+          <h2>Défis terminés</h2>
           <p>{completedQuests} / {profile.quests.length}</p>
         </div>
 
         <div className="card">
-          <h2>Unlocked Skills</h2>
+          <h2>Compétences débloquées</h2>
           <p>{unlockedSkills} / {profile.skills.length}</p>
         </div>
       </div>
 
       <div className="card-grid">
         <div className="card">
-          <h2>Achievements</h2>
+          <h2>Succès</h2>
           <ul>
             {profile.achievements.map((achievement, index) => (
               <li key={index}>{achievement}</li>
@@ -70,7 +70,7 @@ function Dashboard() {
         </div>
 
         <div className="card">
-          <h2>Top Languages</h2>
+          <h2>Langages principaux</h2>
           <ul>
             {profile.top_languages.map((language, index) => (
               <li key={index}>{language}</li>

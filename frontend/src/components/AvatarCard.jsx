@@ -6,17 +6,17 @@ function AvatarCard({ avatarStage, level }) {
   };
 
   const getAvatarText = () => {
-    if (avatarStage === "Beginner") return "Starter Explorer";
-    if (avatarStage === "Intermediate") return "Skill Hunter";
-    return "Career Master";
+    if (avatarStage === "Beginner") return "Explorateur débutant";
+    if (avatarStage === "Intermediate") return "Chasseur de compétences";
+    return "Maître de carrière";
   };
 
   return (
     <div className="card avatar-card">
       <div className="avatar-visual">{getAvatarEmoji()}</div>
       <h2>{getAvatarText()}</h2>
-      <p>Stage: {avatarStage}</p>
-      <p>Level {level}</p>
+      <p>Palier : {avatarStage}</p>
+      <p>Niveau {level}</p>
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Leaderboard() {
         const data = await getLeaderboard();
         setPlayers(data);
       } catch (err) {
-        setError("Unable to load leaderboard");
+        setError("Impossible de charger le classement");
       } finally {
         setLoading(false);
       }
@@ -33,15 +33,21 @@ function Leaderboard() {
   return (
     <div className="page leaderboard-page">
       <div className="leaderboard-hero">
-        <p className="section-kicker">Real Ranking</p>
-        <h1>Leaderboard</h1>
+        <p className="section-kicker">Classement réel</p>
+        <h1>Classement</h1>
         <p className="leaderboard-intro">
-          Discover the most advanced CareerQuest profiles based on GitHub-powered XP.
+          Découvrez les profils CareerQuest les plus avancés, classés à partir des XP générés via GitHub.
         </p>
       </div>
 
-      {loading && <p className="status-text">Loading leaderboard...</p>}
+      {loading && <p className="status-text">Chargement du classement...</p>}
       {error && <p className="error-text">{error}</p>}
+
+      {!loading && !error && players.length === 0 && (
+        <div className="card leaderboard-note">
+          <p>Aucun profil n’a encore été enregistré dans le classement.</p>
+        </div>
+      )}
 
       {!loading && !error && players.length > 0 && (
         <>
@@ -64,12 +70,12 @@ function Leaderboard() {
 
                 <div className="podium-stats">
                   <span>{player.xp} XP</span>
-                  <span>Level {player.level}</span>
+                  <span>Niveau {player.level}</span>
                 </div>
 
                 <div className="podium-meta">
-                  <span>{player.repo_count} repos</span>
-                  <span>{player.followers} followers</span>
+                  <span>{player.repo_count} dépôts</span>
+                  <span>{player.followers} abonnés</span>
                 </div>
               </div>
             ))}
@@ -77,10 +83,10 @@ function Leaderboard() {
 
           <div className="leaderboard-table card">
             <div className="leaderboard-table-head">
-              <span>Rank</span>
-              <span>Player</span>
+              <span>Rang</span>
+              <span>Joueur</span>
               <span>XP</span>
-              <span>Level</span>
+              <span>Niveau</span>
             </div>
 
             <div className="leaderboard-table-body">
@@ -110,7 +116,7 @@ function Leaderboard() {
           {others.length > 0 && (
             <div className="card leaderboard-note">
               <p>
-                The leaderboard is generated from saved GitHub analyses stored in the backend.
+                Le classement est généré à partir des analyses GitHub enregistrées dans le backend.
               </p>
             </div>
           )}
